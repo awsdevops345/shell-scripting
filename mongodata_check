@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# MongoDB connection details
+MONGO_HOST="your_mongodb_host"
+MONGO_PORT="your_mongodb_port"
+DATABASE_NAME="your_database_name"
+COLLECTION_NAME="your_collection_name"
+
+# MongoDB query to check if the collection has any documents
+QUERY_RESULT=$(mongo --quiet --host $MONGO_HOST --port $MONGO_PORT $DATABASE_NAME --eval "db.$COLLECTION_NAME.count()")
+
+# Check the result of the query
+if [ "$QUERY_RESULT" -gt 0 ]; then
+    echo "MongoDB collection '$COLLECTION_NAME' in database '$DATABASE_NAME' has data."
+else
+    echo "MongoDB collection '$COLLECTION_NAME' in database '$DATABASE_NAME' is empty."
+fi

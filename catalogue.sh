@@ -106,8 +106,9 @@ if [ "$QUERY_RESULT" -gt 0 ]; then
     exit 1;
 else
     echo "MongoDB collection '$COLLECTION_NAME' in database '$DATABASE_NAME' is empty."
+
+    mongo --host $MONGDB_HOST </app/schema/catalogue.js &>> $LOGFILE
+
+    VALIDATE $? "Loading catalouge data into MongoDB" 
 fi
 
-mongo --host $MONGDB_HOST </app/schema/catalogue.js &>> $LOGFILE
-
-VALIDATE $? "Loading catalouge data into MongoDB"   
