@@ -98,7 +98,7 @@ dnf install mongodb-org-shell -y &>> $LOGFILE
 
 VALIDATE $? "Installing MongoDB client"
 
-QUERY_RESULT=$(mongo --quiet --host $MONGODB_HOST $DATABASE_NAME --eval "db.$COLLECTION_NAME.count()")
+QUERY_RESULT=$(mongo --quiet --host $MONGODB_HOST --port $MONGODB_PORT $DATABASE_NAME --eval "db.$COLLECTION_NAME.count()")
 
 # Check the result of the query
 if [ "$QUERY_RESULT" -gt 0 ]; then
