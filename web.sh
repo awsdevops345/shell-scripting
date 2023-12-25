@@ -60,6 +60,8 @@ VALIDATE $? "unzipping web.zip"
 
 cp /home/centos/shell-scripting/roboshop.conf /etc/nginx/default.d/roboshop.conf
 
+VALIDATE $? "copying roboshop.conf"
+
 systemctl restart nginx
 
 VALIDATE $? "restarting nginx"
