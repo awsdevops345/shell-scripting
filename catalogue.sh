@@ -5,7 +5,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-MONGDB_HOST=mongo.learnaws.online
+MONGO_HOST=mongo.learnaws.online
 
 MONGO_PORT=27017
 DATABASE_NAME=catalogue
