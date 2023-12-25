@@ -7,6 +7,10 @@ Y="\e[33m"
 N="\e[0m"
 MONGDB_HOST=mongo.learnaws.online
 
+MONGO_PORT="27017"
+DATABASE_NAME="catalogue"
+COLLECTION_NAME="products"
+
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
@@ -94,6 +98,16 @@ dnf install mongodb-org-shell -y &>> $LOGFILE
 
 VALIDATE $? "Installing MongoDB client"
 
+QUERY_RESULT=$(mongo --quiet --host $MONGODB_HOST --port $MONGO_PORT $DATABASE_NAME --eval "db.$COLLECTION_NAME.count()")
+
+# Check the result of the query
+if [ "$QUERY_RESULT" -gt 0 ]; then
+    echo "MongoDB collection '$COLLECTION_NAME' in database '$DATABASE_NAME' has data."
+    exit 1;
+else
+    echo "MongoDB collection '$COLLECTION_NAME' in database '$DATABASE_NAME' is empty."
+fi
+
 mongo --host $MONGDB_HOST </app/schema/catalogue.js &>> $LOGFILE
 
-VALIDATE $? "Loading catalouge data into MongoDB"
+VALIDATE $? "Loading catalouge data into MongoDB"   
