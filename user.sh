@@ -8,7 +8,7 @@ N="\e[0m"
 MONGO_HOST=mongo.learnaws.online
 
 MONGO_PORT=27017
-DATABASE_NAME=user
+DATABASE_NAME=users
 COLLECTION_NAME=users
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
