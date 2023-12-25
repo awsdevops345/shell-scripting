@@ -102,9 +102,9 @@ if [ "$QUERY_RESULT" -gt 0 ]; then
 else
     echo "MongoDB collection '$COLLECTION_NAME' in database '$DATABASE_NAME' is empty."
 
-    mongo --host $MONGDB_HOST </app/schema/user.js &>> $LOGFILE
+    mongo --host $MONGO_HOST </app/schema/user.js &>> $LOGFILE
 
-    VALIDATE $? "Loading catalouge data into MongoDB" 
+    VALIDATE $? "Loading user data into MongoDB" 
 fi
 
 
