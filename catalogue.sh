@@ -7,9 +7,9 @@ Y="\e[33m"
 N="\e[0m"
 MONGDB_HOST=mongo.learnaws.online
 
-MONGO_PORT="27017"
-DATABASE_NAME="catalogue"
-COLLECTION_NAME="products"
+MONGO_PORT=27017
+DATABASE_NAME=catalogue
+COLLECTION_NAME=products
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
