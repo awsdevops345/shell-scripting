@@ -8,60 +8,60 @@ N="\e[0m"
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
-exec &>> $LOGFILE
 
-echo "script stareted executing at $TIMESTAMP" 
+
+echo "script stareted executing at $TIMESTAMP"   &>> $LOGFILE
 
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo -e "$2 ... $R FAILED $N"
+        echo -e "$2 ... $R FAILED $N" 
         exit 1
     else
-        echo -e "$2 ... $G SUCCESS $N"
+        echo -e "$2 ... $G SUCCESS $N"  
     fi
 }
 
 if [ $ID -ne 0 ]
 then
-    echo -e "$R ERROR:: Please run this script with root access $N"
+    echo -e "$R ERROR:: Please run this script with root access $N" 
     exit 1 # you can give other than 0
 else
-    echo "You are root user"
+    echo "You are root user" 
 fi # fi means reverse of if, indicating condition end
 
-dnf install nginx -y
+dnf install nginx -y  &>> $LOGFILE
 
-VALIDATE $? "Installing Nginx"
+VALIDATE $? "Installing Nginx" 
 
-systemctl enable nginx
+systemctl enable nginx  &>> $LOGFILE
 
-VALIDATE $? "enabling Nginx"
+VALIDATE $? "enabling Nginx"  
 
-systemctl start nginx
+systemctl start nginx  &>> $LOGFILE
 
 VALIDATE $? "starting Nginx"
 
-rm -rf /usr/share/nginx/html/*
+rm -rf /usr/share/nginx/html/*  &>> $LOGFILE
 
 VALIDATE $? "removing default html content"
 
-curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
+curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip  &>> $LOGFILE
 
 VALIDATE $? "download web.zip"
 
-cd /usr/share/nginx/html
+cd /usr/share/nginx/html  &>> $LOGFILE
 
 VALIDATE $? "changing to html directory"
 
-unzip -o /tmp/web.zip
+unzip -o /tmp/web.zip  &>> $LOGFILE
 
 VALIDATE $? "unzipping web.zip"
 
-cp /home/centos/shell-scripting/roboshop.conf /etc/nginx/default.d/roboshop.conf
+cp /home/centos/shell-scripting/roboshop.conf /etc/nginx/default.d/roboshop.conf  &>> $LOGFILE
 
 VALIDATE $? "copying roboshop.conf"
 
-systemctl restart nginx
+systemctl restart nginx   &>> $LOGFILE
 
 VALIDATE $? "restarting nginx"
